@@ -1,0 +1,13 @@
+---
+- hosts: TST
+  user: dliu
+  vars:
+    full_name: 'Our Tester'
+  tasks:
+    - name: deleting linux accout tester
+      user:
+        name: tester
+        state: absent
+        remove: yes
+
+
