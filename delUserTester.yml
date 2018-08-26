@@ -1,6 +1,7 @@
 ---
 - hosts: all
   user: dliu
+  become: yes
   vars:
     full_name: 'Our Tester'
   tasks:
