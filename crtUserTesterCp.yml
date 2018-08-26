@@ -1,0 +1,51 @@
+---
+- hosts: TST
+  user: dliu
+  vars:
+    full_name: 'Our Tester'
+  tasks:
+    - name: adding linux accout tester
+      user:
+        name: tester
+        password: '$6$6g10Pu0kK1mE9gYy$nq9qNdB6MUF8oEqsYa4ZbkT8caYNqWmd7hwDaYVVhUH7vyOAabgJNFecST7Vg3QZsDvi7UUX2XbdJy.bO4IpG/'
+        groups:
+          - dliu
+          - wheel
+        state: present
+        shell: /bin/bash
+        system: no
+        createhome: yes
+        home: /home/tester
+
+    - name: creating .ssh direcotry for tester
+      file:
+        path: /home/tester/.ssh
+        state: directory
+        owner: tester
+        group: tester
+        mode: 0700
+
+    - name: uploading ssh public key 
+      copy:
+        src: /home/dliu/try/4ansible/tester-keys/tester_id_ras.pub
+        dest: /home/tester/.ssh/id_rsa.pub
+        owner: tester
+        group: tester
+        mode: 0644
+
+    - name: uploading ssh private key 
+      copy:
+        src: /home/dliu/try/4ansible/tester-keys/tester_id_ras
+        dest: /home/tester/.ssh/id_rsa
+        owner: tester
+        group: tester
+        mode: 0600
+
+    - name: uploading authorized_keys file
+      copy:
+        src: /home/dliu/try/4ansible/tester-keys/tester_id_ras.pub
+        dest: /home/tester/.ssh/authorized_keys
+        owner: tester
+        group: tester
+        mode: 0644
+
