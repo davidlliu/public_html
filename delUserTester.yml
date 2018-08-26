@@ -1,5 +1,5 @@
 ---
-- hosts: TST
+- hosts: all
   user: dliu
   vars:
     full_name: 'Our Tester'
